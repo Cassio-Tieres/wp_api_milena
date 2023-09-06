@@ -15,12 +15,14 @@ function api_get_banners() {
         $id_banner = get_the_ID();
         $slug_banner = get_post_field('post_name', $id_banner);
         $titulo_banner = get_the_title();
+        $imgUrl = get_field('imagem_banner', $id_banner);
 
 
         $post = array(
             'id'     => $id_banner,
             'slug'   => $slug_banner,
-            'titulo' => $titulo_banner
+            'titulo' => $titulo_banner,
+            'imgUrl' => $imgUrl
         );
 
         $posts[$slug_banner] = $post;
