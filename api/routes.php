@@ -28,3 +28,12 @@ function get_abordagem_routes() {
     ));
 }
 add_action('rest_api_init', 'get_abordagem_routes');
+
+// GET PUBLICO-ALVO
+function get_publico_alvo_routes() {
+    register_rest_route('psimilenamod/v1', 'publico-alvo', array(
+        'methods' => 'GET',
+        'callback' => 'api_get_publico_alvo'
+    ));
+}
+add_action('rest_api_init', 'get_publico_alvo_routes');

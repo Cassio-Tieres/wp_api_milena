@@ -40,8 +40,21 @@ function create_abordagem_posts() {
     );
 }
 
+function create_publico_posts() {
+    register_post_type('publico-alvo',
+        array(
+            'labels' => array(
+                'name'          => 'Público-alvo',
+                'singular_name' => 'Público-alvo'
+            ),
+            'public'      => true,
+            'has_archive' => true
+        )
+    );
+}
 
 // inits
 add_action('init', 'create_banner_post');
 add_action('init', 'create_sobre_posts');
 add_action('init', 'create_abordagem_posts');
+add_action('init', 'create_publico_posts');
