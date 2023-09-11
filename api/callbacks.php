@@ -134,7 +134,7 @@ function api_get_posts() {
     $posts = array();
     $argsP = array(
         'post_type'     => 'post',
-        'post_per_page' => 1
+        'post_per_page' => -1
     );
 
     $loopP = new WP_Query($argsP);
