@@ -10,11 +10,12 @@ function get_banners_routes() {
 
 add_action('rest_api_init', 'get_banners_routes');
 
-// GET BANNER - id
-function get_banner_routes() {
-    register_rest_route('psimilenamod/v1', 'banner/(?P<slug>[-\w]+)', array(
-        'methods'  => 'GET',
-        'callback' => 'api_get_banner'
+
+// GET SOBRE
+function get_sobre_routes() {
+    register_rest_route('psimilenamod/v1', 'sobre', array(
+            'methods'   => 'GET',
+            'callback' => 'api_get_sobre'
     ));
 }
-add_action('rest_api_init', 'get_banner_routes');
+add_action('rest_api_init', 'get_sobre_routes');

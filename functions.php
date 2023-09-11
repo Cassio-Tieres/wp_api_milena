@@ -14,4 +14,21 @@ function create_banner_post() {
     );
 }
 
+function create_sobre_posts() {
+    register_post_type('sobre', 
+        array(
+            'labels' => array(
+                'name'          => 'Sobre',
+                'singular_name' => 'Sobre'
+            ),
+            'public'      => true,
+            'has_archive' => true
+        )
+    );
+}
+
+
+
+// inits
 add_action('init', 'create_banner_post');
+add_action('init', 'create_sobre_posts');
