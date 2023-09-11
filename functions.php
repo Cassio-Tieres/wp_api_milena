@@ -27,8 +27,21 @@ function create_sobre_posts() {
     );
 }
 
+function create_abordagem_posts() {
+    register_post_type('abordagem',
+        array(
+            'labels' => array(
+                'name'          => 'Abordagem',
+                'singular_name' => 'Abordagens'
+            ),
+            'public'      => true,
+            'has_archive' => true
+        )
+    );
+}
 
 
 // inits
 add_action('init', 'create_banner_post');
 add_action('init', 'create_sobre_posts');
+add_action('init', 'create_abordagem_posts');
