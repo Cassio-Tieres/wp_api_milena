@@ -14,8 +14,17 @@ add_action('rest_api_init', 'get_banners_routes');
 // GET SOBRE
 function get_sobre_routes() {
     register_rest_route('psimilenamod/v1', 'sobre', array(
-            'methods'   => 'GET',
+            'methods'  => 'GET',
             'callback' => 'api_get_sobre'
     ));
 }
 add_action('rest_api_init', 'get_sobre_routes');
+
+// GET ABORDAGEM
+function get_abordagem_routes() {
+    register_rest_route('psimilenamod/v1', 'abordagem', array(
+        'methods'  => 'GET',
+        'callback' => 'api_get_abordagem'
+    ));
+}
+add_action('rest_api_init', 'get_abordagem_routes');

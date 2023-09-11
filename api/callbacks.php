@@ -38,11 +38,10 @@ function api_get_sobre() {
         'post_type'     => 'sobre',
         'post_per_page' => 1
     );
+    $loopS = new WP_Query($argsSobre);
 
-    $loopB = new WP_Query($argsSobre);
-
-    while ($loopB->have_posts()){
-        $loopB->the_post();
+    while ($loopS->have_posts()){
+        $loopS->the_post();
 
         $id_sobre = get_the_ID();
         $slug_sobre = get_post_field('post_name', $id_sobre);
@@ -60,6 +59,38 @@ function api_get_sobre() {
         );
 
         $posts[$slug_sobre] = $post;
+    }
+
+    return rest_ensure_response($posts);
+}
+
+// CALLBACK ABORDAGEM
+function api_get_abordagem() {
+    $posts = array();
+    $argsAbordagem = array(
+        'post_type'     => 'abordagem',
+        'post_per_page' => 1
+    );
+
+    $loopA = new WP_Query($argsAbordagem);
+
+    while ($loopA->have_posts()){
+        $loopA->the_post();
+
+        $id_abordagem = get_the_ID();
+        $slug_abordagem = get_post_field('post_name', $id_abordagem);
+        $titulo_abordagem = get_the_title();
+        $texto_abordagem = get_the_content();
+
+
+        $post = array(
+            'id_abordagem'     => $id_abordagem,
+            'slug_abordagem'   => $slug_abordagem,
+            'titulo_abordagem' => $titulo_abordagem,
+            'texto_abordagem'  => $texto_abordagem
+        );
+
+        $posts[$slug_abordagem] = $post;
     }
 
     return rest_ensure_response($posts);
