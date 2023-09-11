@@ -37,3 +37,12 @@ function get_publico_alvo_routes() {
     ));
 }
 add_action('rest_api_init', 'get_publico_alvo_routes');
+
+// GET POSTS
+function get_posts_routes() {
+    register_rest_route('psimilenamod/v1', 'posts', array(
+        'methods' => 'GET',
+        'callback' => 'api_get_posts'
+    ));
+}
+add_action('rest_api_init', 'get_posts_routes');

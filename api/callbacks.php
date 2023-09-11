@@ -38,7 +38,6 @@ function api_get_sobre() {
         'post_type'     => 'sobre',
         'post_per_page' => 1
     );
-  
     $loopS = new WP_Query($argsSobre);
 
     while ($loopS->have_posts()){
@@ -124,25 +123,44 @@ function api_get_publico_alvo() {
         );
 
         $posts[$slug_publico_alvo] = $post;
+    }
+
+    return rest_ensure_response($posts);
+}
+
+// CALLBACK POSTS
+function api_get_posts() {
+    $posts = array();
+    $argsP = array(
+        'post_type'     => 'post',
+        'post_per_page' => -1
     );
 
-    $loopA = new WP_Query($argsAbordagem);
+    $loopP = new WP_Query($argsP);
 
-    while ($loopA->have_posts()){
-        $loopA->the_post();
+    while ($loopP->have_posts()){
+        $loopP->the_post();
 
-        $id_abordagem = get_the_ID();
-        $slug_abordagem = get_post_field('post_name', $id_abordagem);
-        $titulo_abordagem = get_the_title();
-        $texto_abordagem = get_the_content();
+        $id_posts = get_the_ID();
+        $slug_posts = get_post_field('post_name', $id_posts);
+        $titulo_posts = get_the_title();
+        $resumo_posts = get_field('resumo', $id_posts);
+        $texto_posts = get_the_content();
+        $capa_posts = get_field('capa_post', $id_posts);
+        $data_posts = get_field('data_do_post', $id_posts);
 
 
         $post = array(
-            'id_abordagem'     => $id_abordagem,
-            'slug_abordagem'   => $slug_abordagem,
-            'titulo_abordagem' => $titulo_abordagem,
-            'texto_abordagem'  => $texto_abordagem
+            'id_post'      => $id_posts,
+            'slug_post'    => $slug_posts,
+            'capa_do_post' => $capa_posts,
+            'titulo_post'  => $titulo_posts,
+            'resumo_post'  => $resumo_posts,
+            'data_do_post' => $data_posts, 
+            'texto_posts'  => $texto_posts
         );
+
+        $posts[$slug_posts] = $post;
 
     }
 
