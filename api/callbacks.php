@@ -96,3 +96,35 @@ function api_get_abordagem() {
 
     return rest_ensure_response($posts);
 }
+
+// CALLBACK PUBLICO-ALVO
+function api_get_publico_alvo() {
+    $posts = array();
+    $argsPA = array(
+        'post_type'     => 'publico-alvo',
+        'post_per_page' => 1
+    );
+
+    $loopPA = new WP_Query($argsPA);
+
+    while ($loopPA->have_posts()){
+        $loopPA->the_post();
+
+        $id_publico_alvo = get_the_ID();
+        $slug_publico_alvo = get_post_field('post_name', $id_publico_alvo);
+        $titulo_publico_alvo = get_the_title();
+        $texto_publico_alvo = get_the_content();
+
+
+        $post = array(
+            'id_publico_alvo'     => $id_publico_alvo,
+            'slug_publico_alvo'   => $slug_publico_alvo,
+            'titulo_publico_alvo' => $titulo_publico_alvo,
+            'texto_publico_alvo'  => $texto_publico_alvo
+        );
+
+        $posts[$slug_publico_alvo] = $post;
+    }
+
+    return rest_ensure_response($posts);
+}
