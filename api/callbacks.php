@@ -38,7 +38,6 @@ function api_get_sobre() {
         'post_type'     => 'sobre',
         'post_per_page' => 1
     );
-
     $loopS = new WP_Query($argsSobre);
 
     while ($loopS->have_posts()){
@@ -162,6 +161,7 @@ function api_get_posts() {
         );
 
         $posts[$slug_posts] = $post;
+
     }
 
     return rest_ensure_response($posts);
