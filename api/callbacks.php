@@ -38,7 +38,7 @@ function api_get_sobre() {
         'post_type'     => 'sobre',
         'post_per_page' => 1
     );
-
+  
     $loopS = new WP_Query($argsSobre);
 
     while ($loopS->have_posts()){
@@ -124,6 +124,26 @@ function api_get_publico_alvo() {
         );
 
         $posts[$slug_publico_alvo] = $post;
+    );
+
+    $loopA = new WP_Query($argsAbordagem);
+
+    while ($loopA->have_posts()){
+        $loopA->the_post();
+
+        $id_abordagem = get_the_ID();
+        $slug_abordagem = get_post_field('post_name', $id_abordagem);
+        $titulo_abordagem = get_the_title();
+        $texto_abordagem = get_the_content();
+
+
+        $post = array(
+            'id_abordagem'     => $id_abordagem,
+            'slug_abordagem'   => $slug_abordagem,
+            'titulo_abordagem' => $titulo_abordagem,
+            'texto_abordagem'  => $texto_abordagem
+        );
+
     }
 
     return rest_ensure_response($posts);
