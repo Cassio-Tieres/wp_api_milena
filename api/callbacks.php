@@ -128,3 +128,41 @@ function api_get_publico_alvo() {
 
     return rest_ensure_response($posts);
 }
+
+// CALLBACK POSTS
+function api_get_posts() {
+    $posts = array();
+    $argsP = array(
+        'post_type'     => 'post',
+        'post_per_page' => 1
+    );
+
+    $loopP = new WP_Query($argsP);
+
+    while ($loopP->have_posts()){
+        $loopP->the_post();
+
+        $id_posts = get_the_ID();
+        $slug_posts = get_post_field('post_name', $id_posts);
+        $titulo_posts = get_the_title();
+        $resumo_posts = get_field('resumo', $id_posts);
+        $texto_posts = get_the_content();
+        $capa_posts = get_field('capa_post', $id_posts);
+        $data_posts = get_field('data_do_post', $id_posts);
+
+
+        $post = array(
+            'id_post'      => $id_posts,
+            'slug_post'    => $slug_posts,
+            'capa_do_post' => $capa_posts,
+            'titulo_post'  => $titulo_posts,
+            'resumo_post'  => $resumo_posts,
+            'data_do_post' => $data_posts, 
+            'texto_posts'  => $texto_posts
+        );
+
+        $posts[$slug_posts] = $post;
+    }
+
+    return rest_ensure_response($posts);
+}
